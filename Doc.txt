@@ -1,0 +1,123 @@
+npx create-expo-app my-app
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+
+
+
+				Folders
+
+src
+	routes
+		index.js
+	pages
+		Welcome
+			index.js
+		Login
+			index.js
+
+
+
+
+
+
+
+
+
+
+
+				Rotas
+
+Começamos pelas importações:
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Welcome from '../pages/Welcome';
+import SignIn from '../pages/Login';
+
+const Stack = createNativeStackNavigator();
+
+
+
+função de chamada dos componentes:
+export default function Routes() {
+    return (
+        <Stack.Navigator> 
+
+            <Stack.Screen 
+                name='Welcome'
+                component={Welcome}
+            />
+
+               <Stack.Screen 
+                name='SignIn'
+                component={SignIn}
+            />
+
+        </Stack.Navigator>
+    )
+}
+
+
+agora, no nosso app.js:
+
+importações:
+
+import { StatusBar } from 'react-native';
+import React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes';
+
+export default function App() {
+  return (
+
+  );
+}
+
+
+
+
+
+				
+
+
+
+
+
+				Animaç~oes
+
+depois de ter feito o estilo dop Welcome vamos para a animação da 
+logo:
+
+npm install react-native-animatable
+import * as Animatable from 'react-native-animatable'
+
+e definimos a animação:
+        <Animatable.Image 
+                animation="flipInY"
+                source={require('../../assets/images/logo.png')}
+                style={{width: '100%'}}
+                resizeMode='contain'
+                />
+
+
+
+
+
+
+				Hooks de navigation
+
+para usar nosso botão e ir até o signin utilizamos um hook de
+navigation:
+import { useNavigation } from '@react-navigation/native'
+
+iniciamos ele:
+const navigation = useNavigation();
+
+
+
+e o utilizamos no nosso botão com um onPress:
+  <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('SignIn')}
+            >
